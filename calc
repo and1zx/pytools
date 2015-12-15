@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+#coding:utf-8
+
+'''
+简易命令行计算器
+'''
+
+import sys
+from math import *
+from base64 import *
+
+def calc():
+    calc_str = ' '.join(sys.argv[1:])
+    print eval(calc_str)
+
+def arg_check():
+    if len(sys.argv) <= 1 or sys.argv[1] == '-h':
+        print >>sys.stderr, 'usage:\n\tcalc expression\nexample:\n\tcalc \'sqrt(15)+7*1.9\''
+        exit(1)
+
+if __name__ == '__main__':
+    arg_check()
+    try:
+        calc()
+    except Exception, e:
+        print >>sys.stderr, 'ERROR:',e
+        exit(2)

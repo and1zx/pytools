@@ -1,0 +1,45 @@
+#!/usr/bin/python2.6
+#coding:utf-8
+
+'''
+提供两个文件之间求并、交、差集的简易tool
+'''
+
+import sys
+
+if __name__ == '__main__':
+	if len(sys.argv) != 4:
+		print >>sys.stderr, "args error:\n\tsetop file1 [+/-/in] file2"
+		exit(1)
+
+	file1=sys.argv[1]
+	file2=sys.argv[3]
+	op=sys.argv[2]
+
+	a2=set()
+	for line in open(file2,'r'):
+		items=line.strip().split('\t')
+		if len(items)>=1:
+			a2.add(items[0])
+
+	if op == '-':
+		for line in open(file1,'r'):
+			items=line.strip().split('\t')
+			if len(items)>=1 and items[0] not in a2:
+				print line.strip()
+	elif op == 'in':
+		for line in open(file1,'r'):
+			items=line.strip().split('\t')
+			if len(items)>=1 and items[0] in a2:
+				print line.strip()
+	elif op == '+':
+		for line in open(file1,'r'):
+			items=line.strip().split('\t')
+			if len(items)>=1:
+				a2.add(items[0])
+		for key in a2:
+			print key
+	else:
+		print >>sys.stderr, "operator not support"
+
+

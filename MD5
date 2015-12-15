@@ -1,0 +1,22 @@
+#!/usr/bin/env python2.6
+
+import sys
+import hashlib
+
+if __name__ == '__main__':
+	if len(sys.argv) == 2:
+		print hashlib.md5(sys.argv[1].strip()).hexdigest().lower()
+	else:
+		print >>sys.stderr, "usage:\n\tMD5 string"
+
+##!/bin/bash
+#
+#if [ $# != 1 ];
+#then
+#	echo -e "usage:\n\tMD5 string" >&2
+#	exit 1
+#fi
+#
+#str=$1
+#
+#php -r "echo md5('$str').\"\n\";"
